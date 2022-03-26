@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {useThemeSwitcher} from "react-css-theme-switcher";
+import i18n from "i18next";
 
 export const ThemeContext = createContext("ThemeContext");
 
@@ -12,8 +13,9 @@ const ThemeProvider = ({children}) => {
     const [isDarkMode, setIsDarkMode] = useState(darkMode);
     const {switcher, themes} = useThemeSwitcher();
 
-    const changeLanguage = language => {
+    const changeLanguage = async language => {
         localStorage.setItem("lang", JSON.stringify(language));
+        await i18n.changeLanguage(language);
         setLanguage(language);
     }
 
